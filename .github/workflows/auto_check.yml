@@ -2,7 +2,7 @@ name: Auto Check Douyin API
 
 on:
   schedule:
-    - cron: '0 23 * * *'  # UTC 23:00 = 北京时间次日 7:00
+    - cron: '0 23 * * *'  # Runs at 23:00 UTC = 北京时间次日 7:00
   workflow_dispatch:      # 允许手动触发
 
 jobs:
@@ -28,16 +28,16 @@ jobs:
       - name: Run check script
         env:
           AI_API_KEY: ${{ secrets.AI_API_KEY }}
-          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
-          GITHUB_EMAIL: ${{ secrets.GITHUB_EMAIL }}
+          GITHUB_USERNAME: ${{ secrets.GH_USERNAME }}
+          GITHUB_EMAIL: ${{ secrets.GH_EMAIL }}
         run: |
           python check_douyin_api.py
 
       - name: Commit and push changes
         if: success()
         run: |
-          git config --global user.name "${{ secrets.GITHUB_USERNAME }}"
-          git config --global user.email "${{ secrets.GITHUB_EMAIL }}"
+          git config --global user.name "${{ secrets.GH_USERNAME }}"
+          git config --global user.email "${{ secrets.GH_EMAIL }}"
           git add douyin_download.py || echo "No new script to commit"
           git commit -m "Auto-update: 接口失效，AI生成新脚本" || echo "No changes to commit"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
