@@ -9,9 +9,8 @@ DOUYIN_TEST_URL = "https://www.douyin.com/api/v2/feed/list/"
 LIKE_THRESHOLD = 10000  # 点赞过万阈值
 AI_API_KEY = os.getenv("AI_API_KEY")  # 从GitHub Secrets读取
 AI_BASE_URL = "https://api.doubao.com/v1"
-GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")  # GitHub用户名（Secrets配置）
-GITHUB_EMAIL = os.getenv("GITHUB_EMAIL")  # GitHub邮箱（Secrets配置）
-
+GITHUB_USERNAME = os.getenv("GH_USERNAME")  # GitHub用户名（Secrets配置）
+GITHUB_EMAIL = os.getenv("GH_EMAIL")  # GitHub邮箱（Secrets配置）
 # 检测接口是否可用
 def check_api():
     try:
